@@ -44,10 +44,11 @@ $categoryAll = $category -> getCategoryAll();
                             <h6>코드: <?= $category["ccode"] ?></h6>
                             <hr>
                             <p>내용: <?= $category["bio"] ?></p>
+                            <img src="./images/category/<?= $category["change_photo"] ?>" alt="">
                             <hr>
                             <div class="text-end">
                                 <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-idx="<?= $category["idx"] ?>" id="modal_update">수정</button>
-                                <button class="btn btn-danger btn-sm">삭제</button>
+                                <button class="btn btn-danger btn-sm" data-idx="<?= $category["idx"] ?>" id="btn_delete">삭제</button>
                             </div>
                         </div>
                         <?php }?>
@@ -62,7 +63,7 @@ $categoryAll = $category -> getCategoryAll();
         </div>
     </div>
 
-    <!-- Modal -->
+    <!-- MODAL -->
     <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -71,7 +72,10 @@ $categoryAll = $category -> getCategoryAll();
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <input type="text" id="mode" name="mode" value="" readonly>
+            <!-- HIDDEN INPUT -->
+            <input type="hidden" id="mode" name="mode" value="" readonly>
+            <input type="hidden" id="idx" name="idx" value="" readonly>
+
             <span>카테고리 이름</span><br>
             <input type="text" class="form-control" id="name" name="name">
             <span>카테고리 내용</span><br>

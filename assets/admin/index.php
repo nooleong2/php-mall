@@ -1,7 +1,15 @@
 <?php
+# SESSION
+include "./inc/session.php";
+if ($session_id == "" || $session_role != "A") {
+    die("<script>alert('접근 권한이 없습니다.'); self.location.href = './login.php';</script>");
+}
+
 # HEADER
+$js_array = ["./js/logout.js"];
 $page_title = "메인";
 include "./inc/header.php";
+
 ?>
     
     <div class="container-fluid">
