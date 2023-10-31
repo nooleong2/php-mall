@@ -2,8 +2,8 @@
 # DATABASE
 include "../../database/database.php";
 
-# PATH
-include "../../define/define.php";
+# SESSION
+include "../inc/session.php";
 
 # CLASS
 include "../class/category_manager.php";
@@ -27,6 +27,13 @@ if ($mode == "add") {
     // 카테고리 이름 빈 값 검증
     if ($name == "") {
         $arr = ["result" => "empty_name"];
+        die(json_encode($arr));
+    }
+
+    // 이미지 확장자 검증
+    list(, $etc) = explode(".", $photo["name"]);
+    if ( !($etc == "png" || $etc == "PNG" || $etc == "jpg" || $etc == "JPG") ) {
+        $arr = ["result" => "wrong_type"];
         die(json_encode($arr));
     }
 
@@ -57,6 +64,7 @@ if ($mode == "add") {
         "bio" => $bio,
         "photo" => $photo_name,
         "change_photo" => $change_photo,
+        "create_by" => $session_id,
     ];
 
     $category -> addCategory($arr);
@@ -104,6 +112,13 @@ if ($mode == "add") {
         $change_photo = $row["change_photo"];
     } else {
 
+        // 이미지 확장자 검증
+        list(, $etc) = explode(".", $photo["name"]);
+        if ( !($etc == "png" || $etc == "PNG" || $etc == "jpg" || $etc == "JPG") ) {
+            $arr = ["result" => "wrong_type"];
+            die(json_encode($arr));
+        }
+
         if ($row["change_photo"] != "") {
             unlink("../images/category/" . $row["change_photo"]);
         }
@@ -118,6 +133,7 @@ if ($mode == "add") {
         "bio" => $bio,
         "photo" => $photo_name,
         "change_photo" => $change_photo,
+        "update_by" => $session_id,
     ];
 
     $category -> updateCategory($arr);

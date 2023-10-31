@@ -49,7 +49,7 @@ class CategoryManager {
             ":bio" => $arr["bio"],
             ":change_photo" => $arr["change_photo"],
             ":photo" => $arr["photo"],
-            ":create_by" => "system",
+            ":create_by" => $arr["create_by"],
         ];
         $stmt -> execute($arr);
     }
@@ -63,7 +63,7 @@ class CategoryManager {
             ":bio" => $arr["bio"],
             ":photo" => $arr["photo"],
             ":change_photo" => $arr["change_photo"],
-            "update_by" => "system",
+            "update_by" => $arr["update_by"],
             "idx" => $arr["idx"],
         ];
         $stmt -> execute($arr);

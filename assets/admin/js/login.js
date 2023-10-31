@@ -26,6 +26,9 @@ btn_login.addEventListener("click", () => {
             } else if (data.result == "empty_password") {
                 alert("비밀번호를 입력해주시기 바랍니다.");
                 password.focus();
+            } else if (data.result == "fail_login") {
+                alert("아이디/비밀번호를 다시 확인해주시기 바랍니다.");
+                id.focus();
             }
         } else {
             alert("통신 실패" + xhr.status);

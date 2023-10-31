@@ -21,17 +21,27 @@ if ($password == "") {
     die(json_encode($arr));
 }
 
-// 아이디 비밀번호 통과
+// 로그인 기능
 $arr = [
     "id" => $id,
     "password" => $password,
 ];
-$admin = $member -> signin($arr);
 
-session_start();
-$_SESSION["session_id"] = $admin["id"];
-$_SESSION["session_role"] = $admin["role"];
+$result = $member -> login($arr);
 
-$arr = ["result" => "success_login"];
-die(json_encode($arr));
+if ($result) {
+    session_start();
+    $_SESSION["session_id"] = $id;
+    $_SESSION["session_role"] = "A";
+
+    $arr = ["result" => "success_login"];
+    die(json_encode($arr));
+
+} else {
+    $arr = ["result" => "fail_login"];
+    die(json_encode($arr));
+}
+
+
+
 

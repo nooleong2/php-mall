@@ -9,17 +9,26 @@ class Member {
     }
 
     // 관리자 로그인
-    public function signin($arr) {
-        $sql = "SELECT * FROM MEMBER WHERE id = :id AND password = :password;";
+    public function login($arr) {
+        $sql = "SELECT * FROM MEMBER WHERE id = :id";
         $stmt = $this -> conn -> prepare($sql);
-        $arr = [
-            ":id" => $arr["id"],
-            ":password" => $arr["password"],
-        ];
-        $stmt -> execute($arr);
-        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+        $stmt -> bindParam(":id", $arr["id"]);
+        $stmt -> execute();
 
-        return $row;
+        // 1-1. 아이디와 동일한게 있으면 가져 옴
+        if ($stmt -> rowCount()) {
+            $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+
+            // 2. 비밀번호 해쉬값 비교
+            if (password_verify($arr["password"], $row["password"])) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            // 1-2. 아이디가 존재하지 않는다.
+            return false;
+        }
     }
 
     // 관리자 로그아웃

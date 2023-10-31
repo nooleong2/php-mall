@@ -79,6 +79,9 @@ btn_submit.addEventListener("click", () => {
                 } else if (data.result == "empty_name") {
                     alert("카테고리 이름을 작성해주세요");
                     name.focus();
+                } else if (data.result == "wrong_type") {
+                    alert("지원하는 확장자가 아닙니다.");
+                    photo.focus();
                 }
             } else {
                 alert("통신 실패" + xhr.status);
@@ -110,6 +113,9 @@ btn_submit.addEventListener("click", () => {
                 } else if (data.result == "empty_idx") {
                     alert("카테고리 번호가 존재하지 않습니다.");
                     self.location.href = "./category_manager.php";
+                } else if (data.result == "wrong_type") {
+                    alert("지원하는 확장자가 아닙니다.");
+                    photo.focus();
                 }
             } else {
                 alert("통신 실패" + xhr.status);
