@@ -43,7 +43,7 @@ $products = $product -> getProductAll();
 
             <table class="table table-hover">
                 <colgroup>
-                    <col width="5%">
+                    <col width="3%">
                     <col width="5%">
                     <col width="5%">
                     <col width="5%">
@@ -70,7 +70,7 @@ $products = $product -> getProductAll();
                     <?php foreach ($products as $product) { ?>
                     <tr data-pcode="<?= $product["pcode"] ?>" id="modal_open">
                         <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["idx"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><img src="./images/product/<?= $product["change_photo"] ?>" alt="없음"></td>
+                        <td data-bs-toggle="modal" data-bs-target="#modal"><img src="./images/product/<?= $product["change_photo"] ?>" alt="없음" style="width:30px; height:30px;"></td>
                         <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["ccode"] ?></td>
                         <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["pcode"] ?></td>
                         <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["name"] ?></td>
@@ -78,8 +78,8 @@ $products = $product -> getProductAll();
                         <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["cnt"] ?></td>
                         <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["country_ko"] ?></td>
                         <td>
-                            <button class="btn btn-warning btn-sm" id="btn_update">수정</button>
-                            <button class="btn btn-danger btn-sm" id="btn_delete">삭제</button>
+                            <button class="btn btn-warning btn-sm" id="btn_update" data-pcode="<?= $product["pcode"] ?>" data-ccode="<?= $product["ccode"] ?>" data-idx="<?= $product["idx"] ?>">수정</button>
+                            <button class="btn btn-danger btn-sm" id="btn_delete" data-pcode="<?= $product["pcode"] ?>">삭제</button>
                         </td>
                     </tr>
                     <?php } ?>
@@ -102,7 +102,7 @@ $products = $product -> getProductAll();
                 </div>
                 <div class="modal-body">
                     <span>상품 이미지</span><br>
-                    <img class="mb-3" src="./images/product/soju.jpg" alt="" style="width: 100%;"><br>
+                    <img class="mb-3" id="modal_photo" src="" alt="" style="width: 100%;"><br>
                     <span>상품 이름</span><br>
                     <input type="text" class="form-control mb-3" id="name" name="name" readonly>
                     <span>상품 내용</span><br>
