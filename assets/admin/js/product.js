@@ -14,11 +14,36 @@ btn_updates.forEach((box) => {
 const btn_deletes = document.querySelectorAll("#btn_delete");
 btn_deletes.forEach((box) => {
     box.addEventListener("click", () => {
-        console.log(box.dataset.pcode);
+        if (confirm("해당 상품을 삭제하시겠습니까?")) {
+            const idx = box.dataset.idx;
+        
+            const f1 = new FormData();
+            f1.append("idx", idx);
+            f1.append("mode", "delete");
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "./process/product_process.php", true);
+            xhr.send(f1);
+            xhr.onload = () => {
+                if (xhr.status == 200) {
+                    const data = JSON.parse(xhr.response);
+
+                    if (data.result == "empty_idx") {
+                        alert("상품이 정상적으로 삭제되지 않았습니다.");
+                        self.location.reload();
+                    } else if (data.result == "success_delete") {
+                        self.location.reload();
+                    }
+                } else {
+                    alert("통신 샐패 " + xhr.status);
+                }
+            }
+        }
+        
     });
 });
 
-// 모달 오픈 버튼 클릭
+// 모달 오픈 (보기) 버튼 클릭
 const modal_opens = document.querySelectorAll("#modal_open");
 modal_opens.forEach((box) => {
     box.addEventListener("click", () =>{
@@ -53,6 +78,8 @@ modal_opens.forEach((box) => {
                 alert("통신 실패" + xhr.status);
             }
         }
+
+        return;
         
     });
 });

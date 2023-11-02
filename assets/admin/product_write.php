@@ -50,7 +50,7 @@ $categorys = $cm -> getCategoryAll();
                 </select>
                 <span>국가 코드(KR)</span>
                 <select name="country_kr" id="country_kr" class="form-select w-25 mb-3">
-                    <!-- 공공데이터 API로 제작 제작 -->
+                    <!-- 공공 데이터로 제작 -->
                 </select>
                 <span>국가 코드(EN)</span>
                 <input type="text" id="country_en" name="country_en" class="form-control w-25" value="KOR"><br>

@@ -33,7 +33,6 @@ if ($mode == "") {
 }
 
 // 모드 기능
-
 if ($mode == "get") {
     if ($pcode == "") {
         $arr = ["result" => "empty_pcode"];
@@ -45,6 +44,22 @@ if ($mode == "get") {
         "result" => "success_get",
         "list" => $row,
     ];
+    die(json_encode($arr));
+
+} else if ($mode == "delete") {
+    if ($idx == "") {
+        $arr = ["result" => "empty_idx"];
+        die(json_encode($arr));
+    }
+
+    // idx 기준으로 지움
+    $row = $product -> getProductFromIdx($idx);
+    
+    // 서버 이미지 파일 삭제
+    unlink("../images/product/" . $row["change_photo"]);
+    
+    $product -> deleteProduct($idx);
+    $arr = ["result" => "success_delete"];
     die(json_encode($arr));
 
 } else {

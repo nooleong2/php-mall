@@ -86,6 +86,13 @@ class Product {
         ];
 
         $stmt -> execute($arr);
+    }
 
+    // 상품 삭제
+    public function deleteProduct($idx) {
+        $sql = "DELETE FROM product WHERE idx = :idx";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> bindParam(":idx", $idx);
+        $stmt -> execute();
     }
 }

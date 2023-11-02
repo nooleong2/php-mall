@@ -51,7 +51,7 @@ $products = $product -> getProductAll();
                     <col width="5%">
                     <col width="5%">
                     <col width="5%">
-                    <col width="5%">
+                    <col width="10%">
                 </colgroup>
                 <thead>
                     <tr>
@@ -66,20 +66,21 @@ $products = $product -> getProductAll();
                         <th scope="col">비고</th>
                     </tr>
                 </thead>
-                <tbody style="cursor: pointer;">
+                <tbody>
                     <?php foreach ($products as $product) { ?>
-                    <tr data-pcode="<?= $product["pcode"] ?>" id="modal_open">
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["idx"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><img src="./images/product/<?= $product["change_photo"] ?>" alt="없음" style="width:30px; height:30px;"></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["ccode"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["pcode"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["name"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["price"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["cnt"] ?></td>
-                        <td data-bs-toggle="modal" data-bs-target="#modal"><?= $product["country_ko"] ?></td>
-                        <td>
+                    <tr>
+                        <td><?= $product["idx"] ?></td>
+                        <td><img src="./images/product/<?= $product["change_photo"] ?>" alt="없음" style="width:30px; height:30px;"></td>
+                        <td><?= $product["ccode"] ?></td>
+                        <td><?= $product["pcode"] ?></td>
+                        <td><?= $product["name"] ?></td>
+                        <td><?= $product["price"] ?></td>
+                        <td><?= $product["cnt"] ?></td>
+                        <td><?= $product["country_ko"] ?></td>
+                        <td style="cursor: pointer;">
+                            <button class="btn btn-success btn-sm" id="modal_open" data-bs-toggle="modal" data-bs-target="#modal" data-pcode="<?= $product["pcode"] ?>">보기</button>
                             <button class="btn btn-warning btn-sm" id="btn_update" data-pcode="<?= $product["pcode"] ?>" data-ccode="<?= $product["ccode"] ?>" data-idx="<?= $product["idx"] ?>">수정</button>
-                            <button class="btn btn-danger btn-sm" id="btn_delete" data-pcode="<?= $product["pcode"] ?>">삭제</button>
+                            <button class="btn btn-danger btn-sm" id="btn_delete" data-idx="<?= $product["idx"] ?>">삭제</button>
                         </td>
                     </tr>
                     <?php } ?>

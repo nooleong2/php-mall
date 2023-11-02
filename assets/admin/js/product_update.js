@@ -68,9 +68,9 @@ btn_update.addEventListener("click", () => {
     
     const f1 = new FormData();
     f1.append("idx", idx.value);
-    f1.append("ccode", ccode.value);
+    f1.append("ccode", ccode.options[ccode.selectedIndex].value); // option에 선택 된 value 값 가져오는 방법
     f1.append("pcode", pcode.value);
-    f1.append("country_kr", country_kr.options[country_kr.selectedIndex].text); // option에 선택 된 텍스트 값 가져오는 방법
+    f1.append("country_kr", country_kr.options[country_kr.selectedIndex].text); // option에 선택 된 text 값 가져오는 방법
     f1.append("country_en", country_en.value);
     f1.append("price", price.value);
     f1.append("cnt", cnt.value);
