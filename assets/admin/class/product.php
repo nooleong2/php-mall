@@ -29,6 +29,17 @@ class Product {
         return $row;
     }
 
+    // 카테고리 기준으로 해당 상품들 정보 가져오기
+    public function getProductFromCategory($ccode) {
+        $sql = "SELECT * FROM product WHERE ccode = :ccode;";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> bindParam(":ccode", $ccode);
+        $stmt -> execute();
+        $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
     // idx 기준으로 해당 상품 정보 가져오기
     public function getProductFromIdx($idx) {
         $sql = "SELECT * FROM product WHERE idx = :idx;";
@@ -95,4 +106,35 @@ class Product {
         $stmt -> bindParam(":idx", $idx);
         $stmt -> execute();
     }
+
+    // 찜 상품 추가
+    public function pickAdd($arr) {
+        $sql = "INSERT INTO pick (id, pcode) VALUES (:id, :pcode)";
+        $stmt = $this -> conn -> prepare($sql);
+        $params = [
+            ":id" => $arr["id"],
+            ":pcode" => $arr["pcode"],
+        ];
+        $stmt -> execute($params);
+    }
+
+    // 찜 상품 삭제
+    public function pickDelete($idx) {
+        $sql = "DELETE FROM pick WHERE idx = :idx";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> bindParam(":idx", $idx);
+        $stmt -> execute();
+    }
+
+    // 찜 목록 가져오기
+    public function getPickList($id) {
+        $sql = "SELECT * FROM pick AS a JOIN product AS b ON a.pcode = b.pcode WHERE a.id = :id  ORDER BY a.idx DESC";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> bindParam(":id", $id);
+        $stmt -> execute();
+        $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
 }

@@ -15,11 +15,12 @@ $categorys = $cm -> getCategoryAll();
 $mem = $member -> getMemberInfo($session_id);
 
 // HEADER
+$js_array = ["./js/mypage.js"];
 include "./inc/inc_header.php";
 ?>
 
 <main class="m-5 w-50 mx-auto p-5 border rounded-5">
-    <h1 class="text-center">회원 수정</h1>
+    <h1 class="text-center">회원 정보</h1>
 
     <form autocomplete="off">
 
@@ -30,7 +31,7 @@ include "./inc/inc_header.php";
         <!-- 아이디 --> 
         <div class="d-flex gap-2 align-items-end">
             <div class="flex-grow-1">
-                <label for="id" class="form-label">아이디*</label>
+                <label for="id" class="form-label">아이디</label>
                 <input type="text" class="form-control" name="id" id="id" value="<?= $mem["id"] ?>" placeholder="아이디를 입력해주세요." readonly>
             </div>
         </div>
@@ -38,19 +39,15 @@ include "./inc/inc_header.php";
         <!-- 비밀번호 -->
         <div class="d-flex mt-3 gap-2 justify-content-between">
             <div class="flex-grow-1">
-                <label for="password1" class="form-label">비밀번호*</label>
-                <input type="password" class="form-control" name="password1" id="password1" placeholder="비밀번호를 입력해주세요.">
-            </div>
-            <div class="flex-grow-1">
-                <label for="password2" class="form-label">비밀번호 확인</label>
-                <input type="password" class="form-control" name="password2" id="password2" placeholder="비밀번호를 입력해주세요.">
+                <label for="password" class="form-label">비밀번호</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호를 입력해주세요.">
             </div>
         </div>
 
         <!-- 이메일 --> 
         <div class="d-flex mt-3 gap-2 align-items-end">
             <div class="flex-grow-1">
-                <label for="email" class="form-label">이메일*</label>
+                <label for="email" class="form-label">이메일</label>
                 <input type="email" class="form-control" name="email" id="email" value="<?= $mem["email"] ?>" placeholder="이메일을 입력해주세요." readonly>
             </div>
         </div>
@@ -58,7 +55,7 @@ include "./inc/inc_header.php";
         <!-- 이름 --> 
         <div class="d-flex mt-3 gap-2 align-items-end">
             <div class="w-50">
-                <label for="name" class="form-label">이름*</label>
+                <label for="name" class="form-label">이름</label>
                 <input type="text" class="form-control" name="name" id="name" value="<?= $mem["name"] ?>" placeholder="이름을 입력해주세요.">
             </div>
         </div>
@@ -95,8 +92,8 @@ include "./inc/inc_header.php";
 
         <!-- 버튼 -->
         <div class="mt-3 d-flex gap-2">
-            <button type="button" class="btn btn-primary w-50" id="btn_submit">가입하기</button>
-            <button type="button" class="btn btn-secondary w-50">가입취소</button>
+            <button type="button" class="btn btn-primary w-50" id="btn_update">수정하기</button>
+            <a href="./index.php" type="button" class="btn btn-secondary w-50">수정취소</a>
         </div>
     </form>
 

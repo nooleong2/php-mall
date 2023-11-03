@@ -8,6 +8,26 @@ class Member {
         $this -> conn = $conn;
     }
 
+    // 회원 수정
+    public function updateMember($arr) {
+        $sql = "UPDATE member SET password = :password, name = :name, zipcode = :zipcode, addr1 = :addr1, addr2 = :addr2, photo = :photo, change_photo = :change_photo, update_by = :update_by, update_at = :update_at WHERE id = :id ";
+
+        $stmt = $this -> conn -> prepare($sql);
+        $params = [
+            ":password" => $arr["password"],
+            ":name" => $arr["name"],
+            ":zipcode" => $arr["zipcode"],
+            ":addr1" => $arr["addr1"],
+            ":addr2" => $arr["addr2"],
+            ":photo" => $arr["photo"],
+            ":change_photo" => $arr["change_photo"],
+            ":update_by" => $arr["id"],
+            ":update_at" => date("Y-m-d H:i:s"),
+            ":id" => $arr["id"],
+        ];
+        $stmt -> execute($params);
+    }
+
     // 아이디 이메일 검증
     public function idOrEmailCheck($param, $valid) {
         $where = "";

@@ -32,7 +32,8 @@ $result = $member -> login($arr);
 if ($result) {
     session_start();
     $_SESSION["session_id"] = $id;
-    $_SESSION["session_role"] = "A";
+    $row = $member -> getMemberInfo($id);
+    $_SESSION["session_role"] = $row["role"];
 
     $arr = ["result" => "success_login"];
     die(json_encode($arr));

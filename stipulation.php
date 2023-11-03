@@ -45,7 +45,7 @@
         <!-- 버튼 -->
         <div class="d-flex justify-content-center mt-4 gap-2">
             <button class="btn btn-primary w-50" id="btn_register">회원가입</button>
-            <button class="btn btn-secondary w-50">가입취소</button>
+            <a href="./index.php" class="btn btn-secondary w-50">가입취소</a>
         </div>
 
         <!-- 회원가입 페이지 바로가기 방지 -->

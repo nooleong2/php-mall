@@ -30,7 +30,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Shopping Mall</a>
+                <a class="navbar-brand" href="./index.php">Shopping Mall</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,13 +39,15 @@
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <?php foreach ($categorys as $category) { ?>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#"><?= $category["name"] ?></a>
+                            <a class="nav-link" aria-current="page" href="./product.php?ccode=<?= $category["ccode"] ?>"><?= $category["name"] ?></a>
                         </li>
                         <?php } ?>
                     </ul>
                     <div>
                         <?php if ( isset($_SESSION["session_id"]) ) { ?>
                             <a class="btn btn-outline-primary" href="./mypage.php">My Page</a>
+                            <a class="btn btn-outline-primary" href="./pick.php">찜 목록</a>
+                            <a class="btn btn-outline-primary" href="./cart.php">장바구니</a>
                             <a class="btn btn-outline-primary" href="./assets/admin/process/logout_process.php?path=client">로그아웃</a>
                         <?php } else { ?>
                             <a class="btn btn-outline-primary" href="./login.php">로그인</a>

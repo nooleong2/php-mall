@@ -1,13 +1,19 @@
 <?php
-# DATABASE
+// SESSION
+include "./inc/session.php";
+if ($session_id == "" || $session_role != "A") {
+    die("<script>alert('접근 권한이 없습니다.'); self.location.href = './login.php';</script>");
+}
+
+// DATABASE
 include "../database/database.php";
 
-# HEADER
+// HEADER
 $js_array = ["./js/category_manager.js"];
 $page_title = "카테고리 관리";
 include "./inc/header.php";
 
-# CLASS
+// CLASS
 include "./class/category_manager.php";
 $category = new CategoryManager($conn);
 $categoryAll = $category -> getCategoryAll();

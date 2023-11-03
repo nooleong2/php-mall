@@ -101,7 +101,7 @@ if (!isset($_POST["chk"]) || $_POST["chk"] != 1) {
         <!-- 버튼 -->
         <div class="mt-3 d-flex gap-2">
             <button type="button" class="btn btn-primary w-50" id="btn_submit">가입하기</button>
-            <button type="button" class="btn btn-secondary w-50">가입취소</button>
+            <a href="./index.php" type="button" class="btn btn-secondary w-50">가입취소</a>
         </div>
     </form>
 
