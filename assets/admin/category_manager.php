@@ -11,6 +11,7 @@ include "../database/database.php";
 // HEADER
 $js_array = ["./js/category_manager.js"];
 $page_title = "카테고리 관리";
+$page_title_code = "c_manager";
 include "./inc/header.php";
 
 // CLASS

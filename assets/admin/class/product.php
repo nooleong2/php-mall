@@ -137,4 +137,35 @@ class Product {
         return $rows;
     }
 
+    // 장바구니 추가
+    public function addCartProduct($arr) {
+        $sql = "INSERT INTO cart (id, pcode, cnt) VALUES (:id, :pcode, :cnt);";
+        $stmt = $this -> conn -> prepare($sql);
+        $params = [
+            ":id" => $arr["id"],
+            ":pcode" => $arr["pcode"],
+            ":cnt" => $arr["cnt"],
+        ];
+        $stmt -> execute($params);
+    }
+
+    // 장바구니 상품 가져오기
+    public function getCartProduct($id) {
+        $sql = "SELECT c.idx, c.pcode, c.cnt, p.name,  p.change_photo, p.price FROM cart AS c JOIN product as p ON c.pcode = p.pcode WHERE c.id = :id ORDER BY c.idx DESC;";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> bindParam(":id", $id);
+        $stmt -> execute();
+        $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
+    // 장바구니 상품 삭제
+    public function deleteCartProduct($idx) {
+        $sql = "DELETE FROM cart WHERE idx = :idx";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> bindParam(":idx", $idx);
+        $stmt -> execute();
+    }
+
 }

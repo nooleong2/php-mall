@@ -11,6 +11,7 @@ include "../database/database.php";
 // HEADER
 $js_array = ["./js/product.js"];
 $page_title = "상품 관리";
+$page_title_code = "product";
 include "./inc/header.php";
 
 // CLASS

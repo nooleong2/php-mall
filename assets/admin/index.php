@@ -8,6 +8,7 @@ if ($session_id == "" || $session_role != "A") {
 # HEADER
 $js_array = ["./js/logout.js"];
 $page_title = "메인";
+$page_title_code = "main";
 include "./inc/header.php";
 
 ?>
