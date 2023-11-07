@@ -17,7 +17,7 @@ pick_delete.forEach((box) => {
     box.addEventListener("click", () => {
         if (confirm("해당 찜 상품을 삭제하시겠습니까?")) {
             const f1 = new FormData();
-            f1.append("idx", box.dataset.idx);
+            f1.append("pcode", box.dataset.pcode);
             f1.append("mode", "delete");
     
             const xhr = new XMLHttpRequest();
@@ -27,7 +27,7 @@ pick_delete.forEach((box) => {
                 if (xhr.status == 200) {
                     const data = JSON.parse(xhr.response);
     
-                    if (data.result == "empty_idx") {
+                    if (data.result == "empty_pcode") {
                         alert("찜 삭제에 실패했습니다.");
                     } else if (data.result == "success") {
                         self.location.reload();

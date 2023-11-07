@@ -50,8 +50,8 @@ include "./inc/inc_header.php";
                     <td><?= $pick["bio"] ?></td>
                     <td><span id="price"><?= $pick["price"] ?></span>원</td>
                     <td>
-                    <button class="btn btn-sm btn-success" id="pick_order">구매</button>
-                        <button class="btn btn-sm btn-danger" id="pick_delete" data-idx="<?= $pick["idx"] ?>">삭제</button>
+                    <a href="detail.php?ccode=<?= $pick["ccode"] ?>&pcode=<?= $pick["pcode"] ?>" class="btn btn-sm btn-success" id="pick_order">구매</a>
+                    <button class="btn btn-sm btn-danger" id="pick_delete" data-pcode="<?= $pick["pcode"] ?>">삭제</button>
                     </td>
                 </tr>
                 <?php } ?>

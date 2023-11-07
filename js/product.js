@@ -21,10 +21,12 @@ btn_pick.forEach((box) => {
     box.addEventListener("click", () => {
         const id = document.querySelector("#session_id");
         const pcode = box.dataset.pcode;
+        const ccode = box.dataset.ccode;
 
         const f1 = new FormData();
         f1.append("id", id.value);
         f1.append("pcode", pcode);
+        f1.append("ccode", ccode);
         f1.append("mode", "add");
 
         const xhr = new XMLHttpRequest();
@@ -36,6 +38,8 @@ btn_pick.forEach((box) => {
 
                 if (data.result == "empty_info") {
                     alert("상품 정보가 존재하지 않습니다.");
+                } else if (data.result == "empty_session_id") {
+                    alert("로그인 후 사용 가능한 아이디입니다.");
                 } else if (data.result == "success") {
                     alert("찜 목록에 추가되었습니다.");
                 } else if (data.result == "already_pick") {

@@ -38,8 +38,8 @@ include "./inc/inc_header.php";
                         <span class="card-text text-danger">가격: <span id="price"><?= $product["price"] ?></span>원</span><br>
                         <span class="card-text text-warning">수량: <span id="cnt"><?= $product["cnt"] ?></span>개</span><br>
                         <div class="mt-2 d-flex justify-content-between">
-                            <button class="btn btn-sm btn-danger" id="btn_pick" data-pcode="<?= $product["pcode"] ?>">찜 추가</button>
-                            <a href="./detail.php?ccode=<?= $product["ccode"] ?>&pcode=<?= $product["pcode"] ?>" class="btn btn-sm btn-success">구매하기</a>
+                            <button class="btn btn-sm btn-danger" id="btn_pick" data-pcode="<?= $product["pcode"] ?>" data-ccode="<?= $product["ccode"] ?>">찜 추가</button>
+                            <a href="./detail.php?ccode=<?= $product["ccode"] ?>&pcode=<?= $product["pcode"] ?>" class="btn btn-sm btn-success">보기/구매</a>
                         </div>
                     </div>
                 </div>
