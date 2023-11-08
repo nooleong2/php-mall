@@ -102,8 +102,9 @@ class Member {
 
     // 로그아웃
     public function logout($path) {
-        session_start();
-        session_destroy();
+        session_start(); //세션시작
+        session_unset(); // 현재 연결된 세션에 등록되어 있는 모든 변수의 값을 삭제한다
+        session_destroy(); //현재의 세션을 종료한다
 
         if (!empty($path)) {
             die("<script>alert('로그아웃 하셨습니다.'); self.location.href = '../../../index.php';</script>");

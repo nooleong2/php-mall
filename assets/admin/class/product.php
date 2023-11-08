@@ -169,6 +169,16 @@ class Product {
         $stmt -> execute();
     }
 
+    // 주문 정보 가져오기
+    public function getOrders() {
+        $sql = "SELECT * FROM orders;";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> execute();
+        $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
     // 상품 주문
     public function order($arr) {
         $sql = "INSERT INTO orders (order_uid, m_id, m_name, m_phone, m_email, m_zipcode, m_addr, p_name, p_code, p_cnt, p_one_price, p_total_price)
