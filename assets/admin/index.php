@@ -5,8 +5,23 @@ if ($session_id == "" || $session_role != "A") {
     die("<script>alert('접근 권한이 없습니다.'); self.location.href = './login.php';</script>");
 }
 
+# DATABASE
+include "../database/database.php";
+
+# CLASS
+include "./class/product.php";
+include "./class/member.php";
+$product = new Product($conn);
+$datOfOrders = $product -> getDayOrder();
+$product_cnt = $product -> getTotalProduct();
+$order_cnt = $product -> getTotalOrder();
+
+$member = new Member($conn);
+$member_cnt = $member -> getTotalMember();
+
+
 # HEADER
-$js_array = ["./js/logout.js"];
+$js_array = ["./js/logout.js", "https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js", "./js/chart.js"];
 $page_title = "메인";
 $page_title_code = "main";
 include "./inc/header.php";
@@ -35,8 +50,41 @@ include "./inc/header.php";
                 </div>
             </div>
 
+            <div class="row mb-3 text-center">
+                <div class="col-sm-4">
+                    <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title"><?= $product_cnt ?><span class="h5 opacity-50"> EA</span></h3>
+                        <p class="card-text text-primary">쇼핑몰 전체 상품 수</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                    <div class="card-body">
+                    <h3 class="card-title"><?= $order_cnt["cnt"] ?><span class="h5 opacity-50"> EA</span></h3>
+                        <p class="card-text text-danger">쇼핑몰 전체 주문 건 수</p>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title"><?= $member_cnt ?><span class="h5 opacity-50"> EA</span></h3>
+                        <p class="card-text text-success">쇼핑몰 전체 회원 수</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- chart -->
+            <canvas id="chart" width="400" height="100"></canvas>
+            <!-- hidden -->
+            <?php foreach ($datOfOrders as $order) { ?>
+                <input type="hidden" id="create_at" value="<?= $order["create_at"]?>">
+                <input type="hidden" id="cnt" value="<?= $order["cnt"]?>">
+            <?php } ?>
         </main>
     </div>
-
   </body>
 </html>

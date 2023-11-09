@@ -77,7 +77,7 @@ class Product {
     // 상품 수정
     public function updateProduct($arr) {
 
-        $sql = "UPDATE product SET ccode = :ccode, pcode = :pcode, name = :name, bio = :bio, photo = :photo, change_photo = :change_photo, price = :price, cnt = :cnt, country_ko = :country_ko, country_en = :country_en, create_by = :create_by
+        $sql = "UPDATE product SET ccode = :ccode, pcode = :pcode, name = :name, bio = :bio, photo = :photo, change_photo = :change_photo, price = :price, cnt = :cnt, country_ko = :country_ko, country_en = :country_en, update_by = :update_by, update_at = NOW()
         WHERE idx = :idx";
 
         $stmt = $this -> conn -> prepare($sql);
@@ -92,7 +92,7 @@ class Product {
             ":cnt" => ((int) $arr["cnt"]),
             ":country_ko" => $arr["country_ko"],
             ":country_en" => $arr["country_en"],
-            ":create_by" => $arr["create_by"],
+            ":update_by" => $arr["update_by"],
             ":idx" => $arr["idx"],
         ];
 
@@ -250,6 +250,35 @@ class Product {
         $stmt = $this -> conn -> prepare($sql);
         $stmt -> bindParam(":id", $cartArr[0]["m_id"]);
         $stmt -> execute();
+    }
+
+    // 일별 주문 건 가져오기
+    public function getDayOrder() {
+        $sql = "SELECT DATE_FORMAT(create_at, '%Y-%m-%d') AS create_at, SUM(p_cnt) AS cnt FROM orders GROUP BY DATE_FORMAT(create_at, '%Y-%m-%d');";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> execute();
+        $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
+    // 상품 수 가져오기
+    public function getTotalProduct() {
+        $sql = "SELECT * FROM product;";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> execute();
+
+        return $stmt -> rowCount();
+    }
+
+    // 총 주문건 수 가져오기
+    public function getTotalOrder() {
+        $sql = "SELECT COUNT(DISTINCT order_uid) AS cnt FROM ORDERS;";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> execute();
+        $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+
+        return $row;
     }
 
 }

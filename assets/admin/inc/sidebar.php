@@ -27,7 +27,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?= ($page_title_code == "member") ? "active" : "" ?>" href="./user.php">
+                            <a class="nav-link <?= ($page_title_code == "member") ? "active" : "" ?>" href="./member.php">
                                 <span data-feather="users" class="align-text-bottom"></span>
                                 회원 관리
                             </a>

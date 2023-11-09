@@ -188,7 +188,7 @@ if ($mode == "get") {
             "bio" => $bio,
             "photo" => $photo_name,
             "change_photo" => $change_photo_name,
-            "create_by" => $session_id,
+            "update_by" => $session_id,
         ];
 
         $product -> updateProduct($arr);

@@ -8,6 +8,16 @@ class Member {
         $this -> conn = $conn;
     }
 
+    // 회원 전체 가져오기
+    public function getMemberAll() {
+        $sql = "SELECT * FROM member;";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> execute();
+        $rows = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $rows;
+    }
+
     // 회원 수정
     public function updateMember($arr) {
         $sql = "UPDATE member SET password = :password, name = :name, zipcode = :zipcode, addr1 = :addr1, addr2 = :addr2, photo = :photo, change_photo = :change_photo, update_by = :update_by, update_at = :update_at WHERE id = :id ";
@@ -122,5 +132,14 @@ class Member {
         $row = $stmt -> fetch(PDO::FETCH_ASSOC);
 
         return $row;
+    }
+
+    // 회원 전체 수 가져오기
+    public function getTotalMember() {
+        $sql = "SELECT * FROM member";
+        $stmt = $this -> conn -> prepare($sql);
+        $stmt -> execute();
+
+        return $stmt -> rowCount();
     }
 }

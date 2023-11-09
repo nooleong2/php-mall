@@ -2,7 +2,7 @@
 $servername = "localhost"; // 서버 주소
 $username = "root"; // DB 아이디
 $password = ""; // DB 비밀번호
-$databasename = "alcohol"; // 사용 할 DB
+$databasename = "mall"; // 사용 할 DB
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$databasename", $username, $password);

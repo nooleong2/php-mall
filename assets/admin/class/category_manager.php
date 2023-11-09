@@ -56,7 +56,7 @@ class CategoryManager {
 
     // 카테고리 수정
     public function updateCategory($arr) {
-        $sql = "UPDATE category_manager SET name = :name, bio = :bio, photo = :photo, change_photo = :change_photo, update_by = :update_by WHERE idx = :idx";
+        $sql = "UPDATE category_manager SET name = :name, bio = :bio, photo = :photo, change_photo = :change_photo, update_by = :update_by, update_at = NOW() WHERE idx = :idx";
         $stmt = $this -> conn -> prepare($sql);
         $arr = [
             ":name" => $arr["name"],

@@ -55,11 +55,11 @@ $categorys = $cm -> getCategoryAll();
                 <span>국가 코드(EN)</span>
                 <input type="text" id="country_en" name="country_en" class="form-control w-25" value="KOR"><br>
                 <span>상품 코드</span>
-                <input type="text" id="pcode" name="pcode" class="form-control w-25"><br>
+                <input type="text" id="pcode" name="pcode" class="form-control w-25" maxlength="10"><br>
                 <span>상품 가격(원)</span>
-                <input type="number" id="price" name="price" class="form-control w-25" autocomplete="off"><br>
+                <input type="number" id="price" name="price" class="form-control w-25" autocomplete="off" min="1" max="999"><br>
                 <span>상품 수</span>
-                <input type="number" id="cnt" name="cnt" class="form-control w-25" autocomplete="off"><br>
+                <input type="number" id="cnt" name="cnt" class="form-control w-25" autocomplete="off" min="1" max="999"><br>
                 <span>상품 이름</span>
                 <input type="text" id="name" name="name" class="form-control w-50" autocomplete="off"><br>
                 <span>상품 소개</span>

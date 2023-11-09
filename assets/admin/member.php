@@ -9,14 +9,14 @@ if ($session_id == "" || $session_role != "A") {
 include "../database/database.php";
 
 // CLASS
-include "./class/product.php";
-$product = new Product($conn);
-$orders = $product -> getOrders();
+include "./class/member.php";
+$member = new Member($conn);
+$members = $member -> getMemberAll();
 
 # HEADER
 $js_array = ["./js/excel.js"];
-$page_title = "주문 관리";
-$page_title_code = "order";
+$page_title = "회원 관리";
+$page_title_code = "member";
 include "./inc/header.php";
 
 ?>
@@ -31,11 +31,11 @@ include "./inc/header.php";
 
             <div
                 class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">주문 관리</h1>
+                <h1 class="h2">회원 관리</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group me-2">
+                    <!-- <div class="btn-group me-2">
                         <button type="button" class="btn btn-sm btn-success" id="btn_order_excel">엑셀 다운로드</button>
-                    </div>
+                    </div> -->
                     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
                         <span data-feather="calendar" class="align-text-bottom"></span>
                         This week
@@ -47,24 +47,28 @@ include "./inc/header.php";
                 <thead>
                     <tr>
                         <th scope="col">순번</th>
-                        <th scope="col">주문 번호</th>
-                        <th scope="col">주문자</th>
-                        <th scope="col">상품명</th>
-                        <th scope="col">개당 가격</th>
-                        <th scope="col">구매 상품 수</th>
-                        <th scope="col">토탈 가격</th>
+                        <th scope="col">프로필</th>
+                        <th scope="col">아이디</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">이메일</th>
+                        <th scope="col">등급</th>
+                        <th scope="col">가입 일자</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($orders as $order) { ?>
+                    <?php foreach ($members as $member) { ?>
                     <tr>
-                        <td><?= $order["idx"] ?></td>
-                        <td><?= $order["order_uid"] ?></td>
-                        <td><?= $order["m_name"] ?></td>
-                        <td><?= $order["p_name"] ?></td>
-                        <td><?= $order["p_one_price"] ?></td>
-                        <td><?= $order["p_cnt"] ?></td>
-                        <td><?= $order["p_total_price"] ?></td>
+                        <td><?= $member["idx"] ?></td>
+                        <?php if ($member["change_photo"]) { ?>
+                            <td><img src="../../images/<?= $member["change_photo"] ?>" alt="" width="30px" height="30px"></td>
+                        <?php } else { ?>
+                            <td><img src="../../images/default.png" alt="" width="30px" height="30px"></td>
+                        <?php } ?>
+                        <td><?= $member["id"] ?></td>
+                        <td><?= $member["name"] ?></td>
+                        <td><?= $member["email"] ?></td>
+                        <td><?= $member["role"] ?></td>
+                        <td><?= $member["create_at"] ?></td>
                     </tr>
                     <?php } ?>
                 </tbody>
